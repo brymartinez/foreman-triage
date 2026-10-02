@@ -1,0 +1,6 @@
+interface:
+  display_name: "Foreman triage"
+  short_description: "Interview a feature or issue and publish decisions"
+  default_prompt: "Use $foreman-triage to develop a feature issue in the current repository, or supply a GitHub repository or issue URL."
+policy:
+  allow_implicit_invocation: false
