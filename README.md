@@ -16,4 +16,6 @@ ln -s ~/.local/share/foreman-triage ~/.codex/skills/foreman-triage  # Codex desk
 
 Run `/foreman-triage` in Claude Code or `$foreman-triage` in Codex. Optionally add a GitHub repository or issue URL. With no URL, the skill uses the current checkout's GitHub repository. Restart an already open agent session if it does not see the new skill.
 
+After you confirm the final draft, the skill publishes it, creates the target repository's `triaged` label if needed, and applies the label to the issue. Foreman can then consider the issue for auto mode. If the label step fails, the skill reports that the issue is still ineligible for auto mode.
+
 To update, run `git -C ~/.local/share/foreman-triage pull`.
