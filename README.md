@@ -1,6 +1,6 @@
 # Foreman triage
 
-A skill for Claude Code and Codex that interviews you about a GitHub feature or issue, then publishes the decisions to the issue you confirm. It uses the GitHub CLI (`gh`), so sign in with `gh auth login` first.
+A skill for Claude Code and Codex that interviews you about a GitHub or Linear feature or issue, then publishes the decisions to the issue you confirm. For GitHub, sign in to the GitHub CLI with `gh auth login`. For Linear, use an authenticated Linear connection or set `LINEAR_API_KEY` in your environment.
 
 ## Install
 
@@ -14,8 +14,8 @@ ln -s ~/.local/share/foreman-triage ~/.agents/skills/foreman-triage  # Codex
 ln -s ~/.local/share/foreman-triage ~/.codex/skills/foreman-triage  # Codex desktop
 ```
 
-Run `/foreman-triage` in Claude Code or `$foreman-triage` in Codex. Optionally add a GitHub repository or issue URL. With no URL, the skill uses the current checkout's GitHub repository. Restart an already open agent session if it does not see the new skill.
+Run `/foreman-triage` in Claude Code or `$foreman-triage` in Codex. Optionally add a GitHub repository/issue URL or a Linear project/issue URL. A project or repository URL starts a new feature interview; an issue URL continues triage on that issue. With no URL, the skill uses the current checkout's GitHub repository. Restart an already open agent session if it does not see the new skill.
 
-After you confirm the final draft, the skill publishes it, creates the target repository's `triaged` label if needed, and applies the label to the issue. Foreman can then consider the issue for auto mode. If the label step fails, the skill reports that the issue is still ineligible for auto mode.
+After you confirm the final draft, the skill publishes it and applies the target's `triaged` label, creating the label if needed and permitted. GitHub issues can then be considered by Foreman's auto mode. Linear issues will become eligible when Foreman's Linear integration is implemented and configured. If the label step fails, the skill reports what was published and what remains incomplete.
 
 To update, run `git -C ~/.local/share/foreman-triage pull`.
