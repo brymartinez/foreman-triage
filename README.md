@@ -16,6 +16,8 @@ ln -s ~/.local/share/foreman-triage ~/.codex/skills/foreman-triage  # Codex desk
 
 Run `/foreman-triage` in Claude Code or `$foreman-triage` in Codex. Optionally add a GitHub repository/issue URL or a Linear project/issue URL. A project or repository URL starts a new feature interview; an issue URL continues triage on that issue. With no URL, the skill uses the current checkout's GitHub repository. Restart an already open agent session if it does not see the new skill.
 
+For UI choices, the skill shows labeled visual options in the invoking chat and waits for your selection before recording the decision.
+
 After you confirm the final draft, the skill publishes it and applies the target's `triaged` label, creating the label if needed and permitted. GitHub issues can then be considered by Foreman's auto mode. Linear issues will become eligible when Foreman's Linear integration is implemented and configured. If the label step fails, the skill reports what was published and what remains incomplete.
 
 To update, run `git -C ~/.local/share/foreman-triage pull`.

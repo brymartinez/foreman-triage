@@ -20,7 +20,7 @@ Accept only GitHub repository/issue and Linear project/issue URLs. Do not treat 
 ## Existing GitHub issue URL
 
 1. Read the issue title, body, and comments, including any prior triage notes. Use `gh issue view <URL> --json title,body,comments,state,url` or an authenticated GitHub tool. Identify what the issue already settles and what choices still need the maintainer's decision. Check relevant repository facts yourself when they affect a question.
-2. Start the interview in this agent conversation after reading the issue. Follow the interview procedure below directly. No other skill or plugin is needed.
+2. Start the interview in this agent conversation after reading the issue. Follow the interview procedure below directly.
 3. When the frontier is empty, draft the issue comment from the maintainer's answers. Include each settled decision, its relevant constraint or rationale, and any question the maintainer explicitly left open. Show the draft in the invoking chat and ask the maintainer there to confirm it reflects the shared understanding. This is the final interview check, not a separate request for permission to post.
 4. As soon as the maintainer confirms the final draft, including any corrections, post one Markdown comment on the same issue headed `## Foreman triage decisions`. Do not end the skill after the interview summary or wait for another instruction to post. Preserve the issue body and existing comments. Check for an equivalent triage comment to avoid a duplicate, and reconcile any issue changes made during the interview. When using `gh`, write the comment to a temporary Markdown file and pass it with `gh issue comment <URL> --body-file <file>`.
 5. Read the posted comment back. Then ensure the target repository has a `triaged` label and apply it to this issue, following **Mark confirmed GitHub issues as triaged** below. Return the comment URL and label result. Triage is complete only when the confirmed decisions are visible on the issue and the label is verified. If GitHub access or posting fails, keep the confirmed draft in the conversation, report the exact blocker, and state that triage is still incomplete. Preserve the issue body, state, assignees, and repository files.
@@ -60,7 +60,7 @@ This procedure incorporates the text of Matt Pocock's `/grill-me` interview engi
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
-Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Send the entire round as a normal assistant message in the invoking chat, where the maintainer invoked this skill. Do not use a question form, separate input control, tool, side panel, or another chat to deliver interview questions. End that turn after the round so the maintainer can reply in the same chat. Then wait for the user's answers before the next round.
+Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Deliver the round in the invoking chat, where the maintainer invoked this skill. You may use tools to prepare and display visual options for UI questions, but keep the question and the maintainer's decision in this chat. Do not move the interview to another chat or treat a preview, tool output, or preselected option as the maintainer's answer. End that turn after the round so the maintainer can reply in the same chat. Then wait for the user's answers before the next round.
 
 Format a round like so:
 
@@ -75,6 +75,10 @@ Format a round like so:
 
 ➡️ <your recommended answer>
 ```
+
+For a UI decision where appearance or interaction affects the choice, show the maintainer concrete, labeled options under the relevant question. Use the available rendering or preview tools to display comparable mockups, screenshots, or prototypes in this chat; a textual list alone is insufficient when the visual difference matters. Keep the options at a comparable scale and show relevant states or interactions when those distinguish them. Briefly explain each option's tradeoff, recommend one, and ask the maintainer to choose or revise it. Inspect an existing UI first when consistency with it matters. Do not silently choose a design from your own mockups. If a visual cannot be rendered, say so and use a clearly labeled wireframe or precise description, then ask for the decision.
+
+Carry the chosen UI behavior and constraints into the final issue draft. Include a durable visual reference when one is available to the implementer; do not rely on a temporary local preview as the only specification.
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
 
