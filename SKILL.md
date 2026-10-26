@@ -17,6 +17,12 @@ In Claude Code, invoke `/foreman-triage` with an optional URL. In Codex, invoke 
 
 Accept only GitHub repository/issue and Linear project/issue URLs. Do not treat GitHub pull requests or other Linear pages as issues. The supplied URL identifies the target; never substitute another repository, project, workspace, or signed-in user's default. With no URL, use the current checkout's GitHub repository.
 
+## Research before and during the interview
+
+Gather relevant available context before asking the first round, and continue checking facts as new decisions expose gaps. Read the target issue and its discussion, repository instructions and design docs, nearby code and tests, relevant git history, related issues and pull requests, and repository knowledge when available. For a new feature, first locate the existing behavior and similar implementations. Follow links that could change the decision tree; stop when further sources would not change a question, recommendation, constraint, or acceptance criterion. Do not equate a large search result with useful context.
+
+Separate verified repository facts, maintainer decisions, and tentative inferences in the interview. Resolve conflicting evidence before recommending a choice, or present the conflict to the maintainer when it is a product decision. Carry the decisions and implementation-relevant constraints into the confirmed issue or triage comment so Foreman's planner can work from that published record without this conversation. Do not publish raw research, private local material, or an unverified claim as a requirement.
+
 ## Existing GitHub issue URL
 
 1. Read the issue title, body, and comments, including any prior triage notes. Use `gh issue view <URL> --json title,body,comments,state,url` or an authenticated GitHub tool. Identify what the issue already settles and what choices still need the maintainer's decision. Check relevant repository facts yourself when they affect a question.
