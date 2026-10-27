@@ -18,6 +18,8 @@ Run `/foreman-triage` in Claude Code or `$foreman-triage` in Codex. Optionally a
 
 For UI choices, the skill shows labeled visual options in the invoking chat and waits for your selection before recording the decision.
 
+Before interviewing, the skill researches relevant issue discussion, repository instructions, code, tests, history, related issues and pull requests. It follows sources that could affect a decision, then publishes the confirmed decisions and constraints for Foreman planning.
+
 After you confirm the final draft, the skill publishes it and applies the target's `triaged` label, creating the label if needed and permitted. GitHub issues can then be considered by Foreman's auto mode. Linear issues will become eligible when Foreman's Linear integration is implemented and configured. If the label step fails, the skill reports what was published and what remains incomplete.
 
 To update, run `git -C ~/.local/share/foreman-triage pull`.
